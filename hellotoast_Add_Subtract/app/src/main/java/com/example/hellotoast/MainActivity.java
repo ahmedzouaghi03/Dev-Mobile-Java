@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast(View view) {
-        Toast toast = Toast.makeText(this, "This app adds without subtracting",
+        Toast toast = Toast.makeText(this, "This app add and subtract",
                 Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void countUp(View view) {
         ++mCount;
+        if (mShowCount != null)
+            mShowCount.setText(Integer.toString(mCount));
+    }
+
+    public void countDown(View view) {
+        --mCount;
         if (mShowCount != null)
             mShowCount.setText(Integer.toString(mCount));
     }
