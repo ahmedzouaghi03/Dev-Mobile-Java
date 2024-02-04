@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast(View view) {
-        Toast toast = Toast.makeText(this, "This app adds without subtracting",
+        Toast toast = Toast.makeText(this, "This app only adds without subtracting",
                 Toast.LENGTH_SHORT);
         toast.show();
     }
