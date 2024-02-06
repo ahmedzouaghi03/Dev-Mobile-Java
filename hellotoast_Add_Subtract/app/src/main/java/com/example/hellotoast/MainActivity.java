@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast(View view) {
-        Toast toast = Toast.makeText(this, "This app add and subtract",
+        Toast toast = Toast.makeText(this, "This app add and subtract :)",
                 Toast.LENGTH_SHORT);
         toast.show();
     }
