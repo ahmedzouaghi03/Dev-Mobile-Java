@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Implicit Intent</string>
+    <string name="Camera_button">Press button to open the Camera</string>
+    <string name="cam_button">Open Cam</string>
+    <string name="video_cam_editText">Press button to open Video Cam</string>
+    <string name="video_cam_btn">Open Video Cam</string>
+</resources>
