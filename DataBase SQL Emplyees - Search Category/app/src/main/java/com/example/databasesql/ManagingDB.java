@@ -96,7 +96,7 @@ public class ManagingDB extends AppCompatActivity {
         ArrayList<String> list = new ArrayList<>();
 
         if (c.getCount() == 0){
-            //Toast.makeText(ManagingDB.this, "La base est vide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ManagingDB.this, "La base est vide", Toast.LENGTH_SHORT).show();
 
             //this lines of code to make it diplay nothingg when there is no results
             while (c.moveToNext()) {
