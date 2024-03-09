@@ -73,4 +73,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:checkedButton="@id/name_radioButton"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/search_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/name_radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:width="115dp"
+            android:text="Name" />
+
+        <RadioButton
+            android:id="@+id/email_radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:width="115dp"
+            android:text="Email" />
+
+        <RadioButton
+            android:id="@+id/phone_radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:width="115dp"
+            android:text="Phone" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

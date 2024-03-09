@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 
 public class ManagingDB extends AppCompatActivity {
     private String searchResult = "";
+    private String chooseElement= "Name";
     private ListView lv;
 
     DataBase dataBase;
@@ -34,12 +37,21 @@ public class ManagingDB extends AppCompatActivity {
         lv = (ListView)findViewById(R.id.list_view);
         dataBase = new DataBase(this);
         SearchView sv = findViewById(R.id.search_bar);
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                RadioButton selected = findViewById(checkedId);
+                chooseElement = selected.getText().toString();
+                viewData();
+                Toast.makeText(ManagingDB.this, chooseElement, Toast.LENGTH_SHORT).show();
+            }
+        });
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 searchResult = s;
                 viewData();
-                //Toast.makeText(ManagingDB.this, searchResult, Toast.LENGTH_SHORT).show();
                 return true;
             }
 
@@ -47,7 +59,6 @@ public class ManagingDB extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 searchResult = s;
                 viewData();
-                //Toast.makeText(ManagingDB.this, searchResult, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -76,18 +87,26 @@ public class ManagingDB extends AppCompatActivity {
     public void viewData(){
         Cursor c;
         if (!searchResult.isEmpty()){
-            c = dataBase.getAllDataSearch(searchResult);
-            //Toast.makeText(ManagingDB.this, "with search", Toast.LENGTH_SHORT).show();
+            c = dataBase.getAllDataSearchByCategory(searchResult,chooseElement);
         }
         else{
             c = dataBase.getAllData();
-            //Toast.makeText(ManagingDB.this, "withouttttt search", Toast.LENGTH_SHORT).show();
         }
 
         ArrayList<String> list = new ArrayList<>();
 
         if (c.getCount() == 0){
-            Toast.makeText(ManagingDB.this, "La base est vide", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ManagingDB.this, "La base est vide", Toast.LENGTH_SHORT).show();
+
+            //this lines of code to make it diplay nothingg when there is no results
+            while (c.moveToNext()) {
+                String item = c.getString(0) + " " + c.getString(1) + " " + c.getString(2) + " " + c.getString(3);
+                list.add(item);
+            }
+            ListAdapter listAdapter = new ArrayAdapter<>(ManagingDB.this,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, list);
+            lv.setAdapter(listAdapter);
+            //to this
         }
         else {
             while(c.moveToNext()){

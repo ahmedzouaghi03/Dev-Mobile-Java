@@ -2,9 +2,11 @@ package com.example.databasesql;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -46,17 +48,35 @@ public class DataBase extends SQLiteOpenHelper{
     }
 
     public Cursor getAllData(){
-
         SQLiteDatabase dB = this.getWritableDatabase();
         Cursor resultat = dB.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
         return resultat;
     }
 
-    public Cursor getAllDataSearch(String search){
 
+    public Cursor getAllDataSearch(String search){
         SQLiteDatabase dB = this.getWritableDatabase();
         Cursor resultat = dB.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " +
                 col_2 + " LIKE ?", new String[]{"%" + search + "%"});
+        return resultat;
+    }
+
+    public Cursor getAllDataSearchByCategory(String search, String category){
+        SQLiteDatabase dB = this.getWritableDatabase();
+        Cursor resultat;
+        if (category.equals("Name")){
+            resultat = dB.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " +
+                    col_2 + " LIKE ?", new String[]{"%" + search + "%"});
+        }
+        else if (category.equals("Email")){
+            resultat = dB.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " +
+                    col_3 + " LIKE ?", new String[]{"%" + search + "%"});
+        }
+        else{
+            resultat = dB.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " +
+                    col_4 + " LIKE ?", new String[]{"%" + search + "%"});
+        }
+
         return resultat;
     }
 
